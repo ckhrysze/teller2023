@@ -52,10 +52,10 @@ defmodule TellerAPI do
     |> get("/payments")
   end
 
+  @spec pay(any, any, any, any) :: {:error, any} | {:ok, Tesla.Env.t()}
   def pay(headers, id, address, amount) do
     headers
     |> client()
-    |> IO.inspect()
     |> post(
       "/payments",
       %{
@@ -67,9 +67,9 @@ defmodule TellerAPI do
     )
   end
 
-  def add_contact(headers, email) do
+  def add_contact(headers, name, address) do
     headers
     |> client()
-    |> post("/payees", %{name: "Samara Pollich", address: "samara.pollich@example.net"})
+    |> post("/payees", %{name: name, address: address})
   end
 end

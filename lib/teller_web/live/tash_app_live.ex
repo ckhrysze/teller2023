@@ -1,9 +1,13 @@
 defmodule TellerWeb.TashAppLive do
+  @moduledoc """
+  Handles all views within the Ta$h app. This would ideally be
+  broken up into multiple modules, but for the sake of speed and
+  state management has not yet been done.
+  """
+
   use TellerWeb, :live_view
 
-  def mount(params, _, socket) do
-    IO.inspect(params)
-
+  def mount(_params, _, socket) do
     {:ok,
      socket
      |> assign(

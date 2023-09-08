@@ -1,4 +1,5 @@
 defmodule Teller.App do
+  # TODO: figure out how to use config to generate
   @mypassword "qKECKB\\O"
 
   def login(params) do
@@ -17,13 +18,12 @@ defmodule Teller.App do
       (headers ++ [{"r-token", Tesla.get_header(response, "r-token")}])
       |> TellerAPI.mfa_verify()
 
-    IO.inspect(response)
+    # TODO: figure out how to extract balance from payload
 
     {:ok, response}
   end
 
   def list_payments(params) do
-    # IO.inspect(params, label: "list_payments")
     response = params.response
     r_token = Tesla.get_header(response, "r-token")
     s_token = Tesla.get_header(response, "s-token")
@@ -52,9 +52,10 @@ defmodule Teller.App do
         {"s-token", Tesla.get_header(response, "s-token")}
       ]
       |> TellerAPI.payees()
-      |> IO.inspect()
 
     challenge = Tesla.get_header(response, "challenge")
+
+    # TODO: check if payee already exists in address book
 
     [
       {"device-id", assigns.device_id},
@@ -69,6 +70,5 @@ defmodule Teller.App do
       params["payee"],
       params["amount"]
     )
-    |> IO.inspect()
   end
 end
