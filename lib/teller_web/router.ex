@@ -17,6 +17,9 @@ defmodule TellerWeb.Router do
   scope "/", TellerWeb do
     pipe_through :browser
 
-    get "/", PageController, :home
+    live "/", TashAppLive, :index
+    live "/amount", TashAppLive, :amount
+    live "/pay", TashAppLive, :pay
+    live "/activity", TashAppLive, :activity
   end
 end
